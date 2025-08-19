@@ -1064,18 +1064,34 @@
                                 font-size: 2rem;
                                 font-weight: bold;
                             }
+                            .error {
+                                background: rgba(239, 68, 68, 0.1);
+                                border: 1px solid rgba(239, 68, 68, 0.3);
+                                border-radius: 12px;
+                                padding: 15px;
+                                margin: 20px 0;
+                                color: #fecaca;
+                            }
                         </style>
                     </head>
                     <body>
                         <div class="container">
                             <div class="logo">E</div>
                             <h1>EUREKA</h1>
-                            <h2>Podcast Institucional</h2>
-                            <audio controls autoplay preload="auto">
+                            <h2>Podcast EUREKA</h2>
+                            
+                            <audio controls preload="auto">
+                                <source src="https://eurekacgr.github.io/eureka/media/podcast.mp3" type="audio/mpeg">
                                 <source src="./media/podcast.mp3" type="audio/mpeg">
-                                <source src="./media/podcast.mp3" type="audio/mp3">
+                                <source src="../media/podcast.mp3" type="audio/mpeg">
                                 Tu navegador no soporta la reproducción de audio.
                             </audio>
+                            
+                            <div class="error">
+                                <strong>¿No se reproduce el audio?</strong><br>
+                                Verifica que el archivo podcast.mp3 esté en la carpeta /media/ del repositorio
+                            </div>
+                            
                             <div class="description">
                                 <p><strong>IA y Gamificación para la Contraloría General de la República</strong></p>
                                 <p>Conversación profunda sobre la propuesta EUREKA, metodología de implementación y el futuro de la fiscalización digital en Costa Rica.</p>
