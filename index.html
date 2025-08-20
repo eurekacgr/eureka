@@ -56,6 +56,131 @@
                 }
             }
         };
+        function openCodigoFuente() {
+            // GitHub del proyecto EUREKA
+            window.open('https://github.com/eurekacgr', '_blank');
+        }
+
+        function openVideosDemostrativos() {
+            // Crear página con los dos videos demostrativos
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                    <head>
+                        <title>Videos Demostrativos - EUREKA CGR</title>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <style>
+                            body {
+                                font-family: 'Inter', sans-serif;
+                                margin: 0;
+                                padding: 20px;
+                                background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+                                color: white;
+                                min-height: 100vh;
+                            }
+                            .container {
+                                max-width: 1200px;
+                                margin: 0 auto;
+                            }
+                            h1 {
+                                font-size: 3rem;
+                                font-weight: 900;
+                                text-align: center;
+                                margin-bottom: 2rem;
+                                background: linear-gradient(45deg, #ffffff, #60a5fa);
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: transparent;
+                            }
+                            .videos-grid {
+                                display: grid;
+                                grid-template-columns: 1fr;
+                                gap: 2rem;
+                                margin-bottom: 2rem;
+                            }
+                            @media (min-width: 768px) {
+                                .videos-grid {
+                                    grid-template-columns: 1fr 1fr;
+                                }
+                            }
+                            .video-card {
+                                background: rgba(255, 255, 255, 0.1);
+                                backdrop-filter: blur(20px);
+                                border-radius: 24px;
+                                padding: 2rem;
+                                border: 1px solid rgba(255, 255, 255, 0.2);
+                            }
+                            .video-card h2 {
+                                font-size: 1.5rem;
+                                font-weight: 600;
+                                margin-bottom: 1rem;
+                                text-align: center;
+                            }
+                            .video-card p {
+                                opacity: 0.9;
+                                margin-bottom: 1.5rem;
+                                line-height: 1.6;
+                                text-align: center;
+                            }
+                            .video-link {
+                                display: block;
+                                background: linear-gradient(135deg, #ef4444, #dc2626);
+                                color: white;
+                                text-decoration: none;
+                                padding: 1rem 2rem;
+                                border-radius: 12px;
+                                text-align: center;
+                                font-weight: 600;
+                                transition: all 0.3s ease;
+                                margin: 0 auto;
+                                max-width: 200px;
+                            }
+                            .video-link:hover {
+                                transform: translateY(-2px);
+                                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                            }
+                            .logo {
+                                width: 80px;
+                                height: 80px;
+                                background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+                                border-radius: 20px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin: 0 auto 20px;
+                                font-size: 2rem;
+                                font-weight: bold;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <div class="logo">E</div>
+                            <h1>Videos Demostrativos</h1>
+                            
+                            <div class="videos-grid">
+                                <div class="video-card">
+                                    <h2>IA para Búsqueda Inteligente</h2>
+                                    <p>Nuestra propuesta de uso de IA para búsqueda inteligente de antecedentes en procedimientos sancionadores de la CGR</p>
+                                    <a href="https://youtu.be/TT2gtmTExy4" target="_blank" class="video-link">
+                                        ▶ Ver Video en YouTube
+                                    </a>
+                                </div>
+                                
+                                <div class="video-card">
+                                    <h2>Gamificación para Validación</h2>
+                                    <p>Nuestra propuesta de gamificación para involucrar a las personas de la CGR en la validación de datos para entrenar la IA y especializarla en el lenguaje contralor</p>
+                                    <a href="https://youtu.be/yJe-dNBiZdM" target="_blank" class="video-link">
+                                        ▶ Ver Video en YouTube
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </body>
+                </html>
+            `);
+        }
     </script>
     
     <!-- Google Fonts -->
@@ -264,7 +389,7 @@
                 <!-- Stats -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 animate-slide-up" style="animation-delay: 0.6s;">
                     <div class="text-center">
-                        <div class="text-4xl font-bold mb-2">45K+</div>
+                        <div class="text-4xl font-bold mb-2">50+</div>
                         <div class="text-sm opacity-80 uppercase tracking-wider">Documentos</div>
                     </div>
                     <div class="text-center">
@@ -320,7 +445,7 @@
                     <h3 class="font-display font-bold text-xl text-gray-800 mb-3">Sistema RAG Funcional</h3>
                     <p class="text-gray-600 mb-4 leading-relaxed text-sm">
                         Implementación completa de Retrieval-Augmented Generation para procesamiento 
-                        inteligente de procedimientos sancionatorios con extracción automática de QA.
+                        inteligente de procedimientos sancionatorios con extracción automática de pares de preguntas/respuestas para entrenamiento de modelos.
                     </p>
                     <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-6">
                         <p class="text-yellow-800 text-xs">
@@ -434,6 +559,43 @@
             </div>
         </div>
     </section>
+    <!-- Código Fuente -->
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-gray-700 via-gray-600 to-gray-900 rounded-3xl flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-gray-500/25 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-3">Código Fuente</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed text-sm">
+                        Explorar el GitHub del proyecto tanto en el juego como en el extractor de datos 
+                        de resoluciones mediante IA. Código abierto y documentado.
+                    </p>
+                    <button onclick="openCodigoFuente()" class="w-full bg-gradient-to-r from-gray-700 to-gray-900 text-white font-semibold py-3 rounded-xl hover:from-gray-800 hover:to-gray-950 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        Ver Repositorio
+                    </button>
+                </div>
+
+                <!-- Videos Demostrativos -->
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-violet-500 via-purple-500 to-purple-700 rounded-3xl flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-violet-500/25 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-3">Videos Demostrativos</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed text-sm">
+                        Visita los videos demostrativos de nuestra propuesta de IA para búsqueda inteligente 
+                        de antecedentes y gamificación para validación de datos.
+                    </p>
+                    <button onclick="openVideosDemostrativos()" class="w-full bg-gradient-to-r from-violet-500 to-purple-700 text-white font-semibold py-3 rounded-xl hover:from-violet-600 hover:to-purple-800 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        Ver Videos
+                    </button>
+                </div>
 
     <!-- Demos Section -->
     <section id="demos" class="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
@@ -461,7 +623,7 @@
                     <h3 class="font-display font-bold text-2xl text-gray-800 mb-4">Sistema RAG Funcional</h3>
                     <p class="text-gray-600 mb-8 leading-relaxed">
                         Interactúa con nuestro sistema de Retrieval-Augmented Generation que procesa 
-                        documentos reales de la CGR y extrae información estructurada para validación humana.
+                        documentos reales de la CGR y extrae de forma nteligente y automatizada antecedentes de casos en materia sancionatoria.
                     </p>
                     <div class="space-y-4 mb-8">
                         <div class="flex items-center text-sm text-gray-500">
@@ -1060,3 +1222,4 @@
                         <div class="flex items-center text-sm text-gray-500">
                             <svg class="w-4 h-4 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.
+
