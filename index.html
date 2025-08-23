@@ -61,141 +61,154 @@
         }
 
         function openVideosDemostrativos() {
-            // Crear página con los dos videos demostrativos
-            const newWindow = window.open('', '_blank');
-            newWindow.document.write(`
-                <!DOCTYPE html>
-                <html>
-                    <head>
-                        <title>Videos Demostrativos - EUREKA CGR</title>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <style>
-                            body {
-                                font-family: 'Inter', sans-serif;
-                                margin: 0;
-                                padding: 20px;
-                                background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-                                color: white;
-                                min-height: 100vh;
-                            }
-                            .container {
-                                max-width: 1200px;
-                                margin: 0 auto;
-                            }
-                            h1 {
-                                font-size: 3rem;
-                                font-weight: 900;
-                                text-align: center;
-                                margin-bottom: 2rem;
-                                background: linear-gradient(45deg, #ffffff, #60a5fa);
-                                -webkit-background-clip: text;
-                                -webkit-text-fill-color: transparent;
-                            }
-                            .videos-grid {
-                                display: grid;
-                                grid-template-columns: 1fr;
-                                gap: 2rem;
-                                margin-bottom: 2rem;
-                            }
-                            @media (min-width: 768px) {
-                                .videos-grid {
-                                    grid-template-columns: 1fr 1fr;
-                                }
-                            }
-                            .video-card {
-                                background: rgba(255, 255, 255, 0.1);
-                                backdrop-filter: blur(20px);
-                                border-radius: 24px;
-                                padding: 2rem;
-                                border: 1px solid rgba(255, 255, 255, 0.2);
-                            }
-                            .video-card h2 {
-                                font-size: 1.5rem;
-                                font-weight: 600;
-                                margin-bottom: 1rem;
-                                text-align: center;
-                            }
-                            .video-card p {
-                                opacity: 0.9;
-                                margin-bottom: 1.5rem;
-                                line-height: 1.6;
-                                text-align: center;
-                            }
-                            .video-link {
-                                display: block;
-                                background: linear-gradient(135deg, #ef4444, #dc2626);
-                                color: white;
-                                text-decoration: none;
-                                padding: 1rem 2rem;
-                                border-radius: 12px;
-                                text-align: center;
-                                font-weight: 600;
-                                transition: all 0.3s ease;
-                                margin: 0 auto;
-                                max-width: 200px;
-                            }
-                            .video-link:hover {
-                                transform: translateY(-2px);
-                                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-                            }
-                            .logo {
-                                width: 80px;
-                                height: 80px;
-                                background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-                                border-radius: 20px;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                margin: 0 auto 20px;
-                                font-size: 2rem;
-                                font-weight: bold;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <div class="container">
-                            <div class="logo">E</div>
-                            <h1>Videos Demostrativos</h1>
-                            
-                            <div class="videos-grid">
-                                <div class="video-card">
-                                    <h2>IA para Búsqueda Inteligente</h2>
-                                    <p>Nuestra propuesta de uso de IA para búsqueda inteligente de antecedentes en procedimientos sancionadores de la CGR</p>
-                                    <a href="https://youtu.be/TT2gtmTExy4" target="_blank" class="video-link">
-                                        ▶ Ver Video en YouTube
-                                    </a>
-                                </div>
-                                
-                                <div class="video-card">
-                                    <h2>Gamificación para Validación</h2>
-                                    <p>Nuestra propuesta de gamificación para involucrar a las personas de la CGR en la validación de datos para entrenar la IA y especializarla en el lenguaje contralor</p>
-                                    <a href="https://youtu.be/yJe-dNBiZdM" target="_blank" class="video-link">
-                                        ▶ Ver Video en YouTube
-                                    </a>
-                                </div>
-
-                                <div class="video-card">
-                                    <h2>Chatbot - Consultas inteligentes</h2>
-                                    <p>Uso de un chatbot IA para realizar una consulta más interactiva sobre las resoluciones almacenadas en el RAG</p>
-                                    <a href="https://youtu.be/5KYVLAw2Yb8" target="_blank" class="video-link">
-                                        ▶ Ver Video en YouTube
-                                    </a>
-                                </div>
-                                <div class="video-card">
-                                    <h2>Lista de reproducción</h2>
-                                    <p>Acceda directamente a la lista de videos relacionados al proyecto con un solo clic</p>
-                                    <a href="https://youtube.com/playlist?list=PLrkXOQC4SfiX4fE_HoIq4TwJ7FmaUPZc9&si=aJ_apRab5hBJorjL" target="_blank" class="video-link">
-                                        ▶ Ver lista de videos en YouTube
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </body>
-                </html>
-            `);
+          // Reemplaza el contenido de la misma pestaña
+          const doc = document;
+          doc.open();
+          doc.write(`<!DOCTYPE html>
+        <html lang="es">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <title>Videos Demostrativos – EUREKA CGR</title>
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+          <style>
+            :root{
+              --bg1:#0b1220; --bg2:#0f172a; --fg:#e2e8f0; --muted:#94a3b8;
+              --accent:#22d3ee; --accent-2:#8b5cf6; --danger:#ef4444;
+              --glass: rgba(255,255,255,.06); --card-border: rgba(148,163,184,.18);
+            }
+            *{box-sizing:border-box}
+            body{
+              margin:0; font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial;
+              color:var(--fg); min-height:100svh;
+              background:
+                radial-gradient(1200px 600px at 50% 0%, rgba(139,92,246,.28), transparent 60%),
+                radial-gradient(1200px 600px at 50% 100%, rgba(34,211,238,.18), transparent 60%),
+                linear-gradient(120deg, var(--bg1) 0%, var(--bg2) 100%);
+              overflow-x:hidden;
+            }
+            .wrap{max-width:1200px; margin-inline:auto; padding:32px 20px 56px}
+            .logo{
+              width:84px;height:84px;border-radius:22px; display:flex;align-items:center;justify-content:center;
+              margin:8px auto 16px; font-weight:900;font-size:1.75rem;letter-spacing:.5px; color:white;
+              background-image: linear-gradient(135deg, var(--accent-2), var(--accent));
+              box-shadow: 0 12px 30px -12px rgba(34,211,238,.45);
+            }
+            h1{
+              margin:0 0 8px; text-align:center; font-size:clamp(2rem,4vw,3.25rem); font-weight:900; letter-spacing:-.02em;
+              background: linear-gradient(45deg, #fff, #a5b4fc 50%, #67e8f9 100%);
+              -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+            }
+            .subtitle{ text-align:center; color:var(--muted); margin:0 auto 28px; max-width:780px; font-size:clamp(.95rem,1.4vw,1.05rem); line-height:1.7; }
+            .grid{ display:grid; gap:22px; grid-template-columns:1fr; margin-top:28px; }
+            @media (min-width:780px){ .grid{ grid-template-columns:1fr 1fr; } }
+            .card{
+              position:relative; display:flex; flex-direction:column; gap:14px; padding:18px; border-radius:22px;
+              background:var(--glass); border:1px solid var(--card-border);
+              box-shadow:0 14px 40px -20px rgba(0,0,0,.45);
+              transition:transform .25s, box-shadow .25s, border-color .25s; overflow:hidden;
+            }
+            .card::before{
+              content:""; position:absolute; inset:-1px; border-radius:22px; padding:1px;
+              background:linear-gradient(135deg, rgba(139,92,246,.45), rgba(34,211,238,.45));
+              -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+              -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; opacity:.25; transition:opacity .25s;
+            }
+            .card:hover{ transform:translateY(-6px); box-shadow:0 28px 60px -24px rgba(34,211,238,.28); }
+            .card:hover::before{ opacity:.5; }
+            .thumb{ position:relative; aspect-ratio:16/9; border-radius:16px; overflow:hidden; background:#0b1220; border:1px solid var(--card-border); }
+            .thumb img{ width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05) contrast(1.05) brightness(.98); transform:scale(1.02); transition:transform .35s, filter .35s; }
+            .card:hover .thumb img{ transform:scale(1.06); filter:saturate(1.1); }
+            .play{ position:absolute; inset:0; display:grid; place-items:center; background:linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.25)); }
+            .play .btn{
+              display:inline-grid; place-items:center; width:64px; height:64px; border-radius:9999px;
+              background:linear-gradient(135deg, var(--danger), #dc2626); box-shadow:0 14px 30px -10px rgba(239,68,68,.5); transition:transform .2s, box-shadow .2s;
+            }
+            .card:hover .play .btn{ transform:scale(1.06); }
+            .play svg{ width:28px;height:28px;color:white; }
+            .title{ font-weight:800; font-size:1.1rem; letter-spacing:.2px; }
+            .desc{ color:var(--fg); opacity:.9; line-height:1.6; font-size:.95rem; }
+            .cta{
+              display:inline-block; align-self:center; margin-top:4px; padding:12px 18px; border-radius:12px; font-weight:700; text-decoration:none; color:#0b1220;
+              background-image:linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow:0 18px 34px -16px rgba(139,92,246,.45); transition:transform .2s, filter .2s;
+            }
+            .cta:hover{ transform:translateY(-2px); filter:brightness(1.05); }
+            .actions{ display:flex; justify-content:center; gap:14px; margin-top:32px; flex-wrap:wrap; }
+            .ghost{ display:inline-block; padding:12px 16px; border-radius:12px; text-decoration:none; color:var(--fg); font-weight:700; border:1px solid var(--card-border); background:rgba(255,255,255,.02); }
+            .fade{ opacity:0; transform:translateY(14px); transition:.6s ease; }
+            .fade.show{ opacity:1; transform:none; }
+          </style>
+        </head>
+        <body>
+          <div class="wrap">
+            <div class="logo">E</div>
+            <h1 class="fade">Videos Demostrativos</h1>
+            <p class="subtitle fade">Muestras del uso de IA, chatbot y gamificación para la transformación digital de la CGR.</p>
+        
+            <section class="grid">
+              <article class="card fade">
+                <a class="thumb" href="https://youtu.be/TT2gtmTExy4" target="_blank" rel="noopener noreferrer" aria-label="Ver IA para Búsqueda Inteligente">
+                  <img src="https://img.youtube.com/vi/TT2gtmTExy4/hqdefault.jpg" alt="Miniatura: IA para Búsqueda Inteligente">
+                  <div class="play"><span class="btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+                </a>
+                <div class="title">IA para Búsqueda Inteligente</div>
+                <p class="desc">Propuesta para búsqueda de antecedentes en procedimientos sancionadores con soporte de RAG y modelos generativos.</p>
+                <a class="cta" href="https://youtu.be/TT2gtmTExy4" target="_blank" rel="noopener noreferrer">Ver en YouTube</a>
+              </article>
+        
+              <article class="card fade">
+                <a class="thumb" href="https://youtu.be/yJe-dNBiZdM" target="_blank" rel="noopener noreferrer" aria-label="Ver Gamificación para Validación">
+                  <img src="https://img.youtube.com/vi/yJe-dNBiZdM/hqdefault.jpg" alt="Miniatura: Gamificación para Validación">
+                  <div class="play"><span class="btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+                </a>
+                <div class="title">Gamificación para Validación</div>
+                <p class="desc">Mecánicas de puntos, logros y rankings para validar y mejorar los datos que alimentan la IA institucional.</p>
+                <a class="cta" href="https://youtu.be/yJe-dNBiZdM" target="_blank" rel="noopener noreferrer">Ver en YouTube</a>
+              </article>
+        
+              <article class="card fade">
+                <a class="thumb" href="https://youtu.be/5KYVLAw2Yb8" target="_blank" rel="noopener noreferrer" aria-label="Ver Chatbot - Consultas inteligentes">
+                  <img src="https://img.youtube.com/vi/5KYVLAw2Yb8/hqdefault.jpg" alt="Miniatura: Chatbot consultas inteligentes">
+                  <div class="play"><span class="btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+                </a>
+                <div class="title">Chatbot – Consultas inteligentes</div>
+                <p class="desc">Interacción natural para consultar resoluciones en la base RAG y obtener respuestas estructuradas.</p>
+                <a class="cta" href="https://youtu.be/5KYVLAw2Yb8" target="_blank" rel="noopener noreferrer">Ver en YouTube</a>
+              </article>
+        
+              <article class="card fade">
+                <a class="thumb" href="https://youtube.com/playlist?list=PLrkXOQC4SfiX4fE_HoIq4TwJ7FmaUPZc9&si=aJ_apRab5hBJorjL" target="_blank" rel="noopener noreferrer" aria-label="Abrir lista de reproducción">
+                  <img src="https://i.imgur.com/0n5d1mY.jpeg" alt="Lista de reproducción del proyecto">
+                  <div class="play"><span class="btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+                </a>
+                <div class="title">Lista de reproducción</div>
+                <p class="desc">Accede a todos los videos del proyecto desde una única lista curada.</p>
+                <a class="cta" href="https://youtube.com/playlist?list=PLrkXOQC4SfiX4fE_HoIq4TwJ7FmaUPZc9&si=aJ_apRab5hBJorjL" target="_blank" rel="noopener noreferrer">Abrir playlist</a>
+              </article>
+            </section>
+        
+            <div class="actions fade">
+              <a class="ghost" href="https://eurekacgr.github.io/eureka/" rel="noopener">← Volver al sitio</a>
+            </div>
+          </div>
+        
+          <script>
+            // Efecto de aparición
+            const els = document.querySelectorAll('.fade');
+            const io = new IntersectionObserver((entries)=>{
+              entries.forEach(e=>{
+                if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+              });
+            },{threshold:0.1});
+            els.forEach(el=>io.observe(el));
+          <\/script>
+        </body>
+        </html>`);
+          doc.close();
         }
-    </script>
+        </script>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
