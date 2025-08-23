@@ -1,639 +1,1223 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EUREKA - IA y Gamificación para la CGR</title>
-  <meta name="description" content="EUREKA - Transformación digital de la Contraloría General de la República mediante IA y gamificación">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💡</text></svg>">
-
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    /* Configuración mínima de Tailwind para fuentes */
-    window.tailwind = window.tailwind || {};
-    window.tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['Inter', 'system-ui', 'sans-serif'],
-            body: ['Inter', 'system-ui', 'sans-serif']
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EUREKA - IA y Gamificación para la CGR</title>
+    <meta name="description" content="EUREKA - Transformación digital de la Contraloría General de la República mediante IA y gamificación">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💡</text></svg>">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.tailwind = window.tailwind || {};
+        window.tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cgr': {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#1e40af',
+                            400: '#1e3a8a',
+                            500: '#1e3a8a',
+                            600: '#1e40af',
+                            700: '#1d4ed8',
+                            800: '#1e3a8a',
+                            900: '#1e3a8a'
+                        },
+                        'eureka': {
+                            50: '#fef7ff',
+                            100: '#fdeeff',
+                            200: '#fbd5ff',
+                            300: '#f7aaff',
+                            400: '#f070ff',
+                            500: '#e940ff',
+                            600: '#d118e6',
+                            700: '#b00dc3',
+                            800: '#9010a0',
+                            900: '#751580',
+                            950: '#4f0258'
+                        }
+                    },
+                    fontFamily: {
+                        'display': ['Inter', 'system-ui', 'sans-serif'],
+                        'body': ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 1s ease-out',
+                        'slide-down': 'slideDown 1s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+                        'gradient-shift': 'gradientShift 6s ease-in-out infinite'
+                    }
+                }
+            }
+        };
+        function openCodigoFuente() {
+            // GitHub del proyecto EUREKA
+            window.open('https://github.com/eurekacgr', '_blank');
         }
-      }
-    };
-  </script>
 
-  <!-- Fuentes -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-    /* ============================
-       Paleta CGR (oficial)
-       ============================ */
-    :root{
-      /* Primarios */
-      --cgr-azul:#1270b8;   /* Process Blue U */
-      --cgr-azul-claro:#88d3ee; /* 2975 U */
-      --cgr-gris:#c8c7c7;   /* Cool Gray 2U */
-
-      /* Complementarios aprobados */
-      --cgr-celeste:#28a9e0; 
-      --cgr-amarillo:#f8ae40;
-      --cgr-gris-claro:#dbdbdb;
-      --cgr-verde:#8ea725;
-      --cgr-verde-suave:#a7c5b7;
-      --cgr-fondo-suave:#e9eddf;
-    }
-
-    /* Animaciones suaves */
-    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-    @keyframes slideUp { from{opacity:0; transform:translateY(40px)} to{opacity:1; transform:none} }
-    @keyframes slideDown { from{opacity:0; transform:translateY(-40px)} to{opacity:1; transform:none} }
-    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-28px)} }
-    @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-
-    /* Hero con degradado autorizado (azules CGR) */
-    .gradient-cgr{
-      background: linear-gradient(135deg, var(--cgr-azul) 0%, var(--cgr-celeste) 50%, var(--cgr-azul-claro) 100%);
-      background-size: 200% 200%;
-      animation: gradientShift 10s ease-in-out infinite;
-    }
-
-    /* Glass sutil sobre azules */
-    .glass{
-      background: rgba(255,255,255,.08);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255,255,255,.20);
-    }
-
-    /* Cards claras de producto (sin morados/rosas) */
-    .card-premium{
-      background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-      border: 1px solid rgba(0,0,0,.06);
-      transition: all .35s ease;
-      position: relative; overflow:hidden;
-    }
-    .card-premium:hover{
-      transform: translateY(-6px);
-      box-shadow: 0 24px 48px rgba(0,0,0,.12);
-      border-color: var(--cgr-azul);
-    }
-
-    /* Botón principal (azul → amarillo institucional) */
-    .btn-cgr{
-      background-image: linear-gradient(135deg, var(--cgr-azul), var(--cgr-amarillo));
-      color: #0b1220; /* contraste correcto sobre amarillo */
-      font-weight: 700;
-      transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
-    }
-    .btn-cgr:hover{ transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 14px 28px rgba(18,112,184,.35); }
-
-    /* Botones secundarios (azul → celeste) */
-    .btn-sec{
-      background-image: linear-gradient(135deg, var(--cgr-azul), var(--cgr-celeste));
-      color: #fff; font-weight:700;
-      transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
-    }
-    .btn-sec:hover{ transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 14px 28px rgba(40,169,224,.35); }
-
-    /* Grillas con retícula azul tenue */
-    .tech-grid{
-      background-image:
-        linear-gradient(rgba(18,112,184,.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(18,112,184,.05) 1px, transparent 1px);
-      background-size: 50px 50px;
-    }
-
-    /* Colores de iconos circulares (3 variantes dentro de la guía) */
-    .badge-azul   { background-image: linear-gradient(135deg, var(--cgr-azul), var(--cgr-celeste)); }
-    .badge-amar   { background-image: linear-gradient(135deg, var(--cgr-amarillo), #e57b3c); } /* naranja permitido */
-    .badge-verde  { background-image: linear-gradient(135deg, var(--cgr-verde), var(--cgr-verde-suave)); }
-
-    /* Aparición sutil */
-    .fade-in{ animation: fadeIn .8s ease both }
-    .slide-up{ animation: slideUp .9s ease both }
-    .slide-down{ animation: slideDown .9s ease both }
-  </style>
-
-  <script>
-    // -------- Navegación / Acciones --------
-    function openCodigoFuente(){ window.open('https://github.com/eurekacgr','_blank'); }
-    function openPresentacion(){ window.location.href = 'presentacion.html'; } // ajusta si usas otra ruta
-    function openRAGDemo(){ window.open('https://eurekacgr.github.io/eureka/','_blank'); } // placeholder
-    function openZonaGamer(){ window.open('https://eurekacgr.github.io/eureka/','_blank'); } // placeholder
-    function openVideoExplicativo(){ window.open('https://youtu.be/TT2gtmTExy4','_blank'); } // ejemplo
-    function openPodcast(){ window.open('#','_blank'); } // placeholder
-    function openGameDemo(){ window.open('#','_blank'); } // placeholder
-
-    // Página embebida de Videos (misma pestaña) usando la paleta
-    function openVideosDemostrativos(){
-      const doc = document; doc.open();
-      doc.write(`<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Videos Demostrativos – EUREKA CGR</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-<style>
-  :root{ --azul:#1270b8; --celeste:#28a9e0; --azulc:#88d3ee; --gris:#c8c7c7; --amar:#f8ae40; }
-  body{ margin:0; font-family:Inter,system-ui,sans-serif; color:#0b1220;
-        background:linear-gradient(135deg, var(--azul) 0%, var(--celeste) 50%, var(--azulc) 100%); }
-  .wrap{ max-width:1200px; margin:0 auto; padding:32px 20px 56px; }
-  .logo{ width:84px; height:84px; border-radius:22px; margin:8px auto 16px;
-         display:flex; align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.75rem;
-         background-image:linear-gradient(135deg, var(--azul), var(--celeste)); box-shadow:0 12px 30px -12px rgba(18,112,184,.45);}
-  h1{ text-align:center; margin:0 0 8px; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#fff; }
-  .subtitle{ text-align:center; color:#f1f9ff; opacity:.95; margin:0 auto 28px; max-width:780px; }
-  .grid{ display:grid; gap:22px; grid-template-columns:1fr; margin-top:28px;}
-  @media(min-width:780px){ .grid{ grid-template-columns:1fr 1fr; } }
-  .card{ background:#ffffff; border:1px solid rgba(0,0,0,.06); border-radius:22px; padding:18px;
-         box-shadow:0 18px 40px -18px rgba(0,0,0,.35);}
-  .thumb{ position:relative; aspect-ratio:16/9; border-radius:16px; overflow:hidden; border:1px solid rgba(0,0,0,.08);}
-  .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .play{ position:absolute; inset:0; display:grid; place-items:center; background:linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.25)); }
-  .btnP{ display:inline-grid; place-items:center; width:64px; height:64px; border-radius:9999px;
-         background-image:linear-gradient(135deg, var(--amar), #e57b3c); box-shadow:0 14px 30px -10px rgba(245,158,11,.45);}
-  .title{ font-weight:800; margin-top:12px; }
-  .desc{ color:#374151; line-height:1.6; }
-  .cta{ display:inline-block; margin-top:6px; padding:12px 18px; border-radius:12px; font-weight:700; text-decoration:none;
-        color:#fff; background-image:linear-gradient(135deg, var(--azul), var(--celeste)); }
-  .actions{ display:flex; justify-content:center; margin-top:28px; }
-  .ghost{ display:inline-block; padding:12px 16px; border-radius:12px; text-decoration:none; color:#0b1220; font-weight:700;
-          border:1px solid rgba(0,0,0,.08); background:#fff; }
-</style>
+        function openVideosDemostrativos() {
+          // Reemplaza el contenido de la misma pestaña
+          const doc = document;
+          doc.open();
+          doc.write(`<!DOCTYPE html>
+        <html lang="es">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <title>Videos Demostrativos – EUREKA CGR</title>
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+          <style>
+            :root{
+              --bg1:#0b1220; --bg2:#0f172a; --fg:#e2e8f0; --muted:#94a3b8;
+              --accent:#22d3ee; --accent-2:#8b5cf6; --danger:#ef4444;
+              --glass: rgba(255,255,255,.06); --card-border: rgba(148,163,184,.18);
+            }
+            *{box-sizing:border-box}
+            body{
+              margin:0; font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial;
+              color:var(--fg); min-height:100svh;
+              background:
+                radial-gradient(1200px 600px at 50% 0%, rgba(139,92,246,.28), transparent 60%),
+                radial-gradient(1200px 600px at 50% 100%, rgba(34,211,238,.18), transparent 60%),
+                linear-gradient(120deg, var(--bg1) 0%, var(--bg2) 100%);
+              overflow-x:hidden;
+            }
+            .wrap{max-width:1200px; margin-inline:auto; padding:32px 20px 56px}
+            .logo{
+              width:84px;height:84px;border-radius:22px; display:flex;align-items:center;justify-content:center;
+              margin:8px auto 16px; font-weight:900;font-size:1.75rem;letter-spacing:.5px; color:white;
+              background-image: linear-gradient(135deg, var(--accent-2), var(--accent));
+              box-shadow: 0 12px 30px -12px rgba(34,211,238,.45);
+            }
+            h1{
+              margin:0 0 8px; text-align:center; font-size:clamp(2rem,4vw,3.25rem); font-weight:900; letter-spacing:-.02em;
+              background: linear-gradient(45deg, #fff, #a5b4fc 50%, #67e8f9 100%);
+              -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+            }
+            .subtitle{ text-align:center; color:var(--muted); margin:0 auto 28px; max-width:780px; font-size:clamp(.95rem,1.4vw,1.05rem); line-height:1.7; }
+            .grid{ display:grid; gap:22px; grid-template-columns:1fr; margin-top:28px; }
+            @media (min-width:780px){ .grid{ grid-template-columns:1fr 1fr; } }
+            .card{
+              position:relative; display:flex; flex-direction:column; gap:14px; padding:18px; border-radius:22px;
+              background:var(--glass); border:1px solid var(--card-border);
+              box-shadow:0 14px 40px -20px rgba(0,0,0,.45);
+              transition:transform .25s, box-shadow .25s, border-color .25s; overflow:hidden;
+            }
+            .card::before{
+              content:""; position:absolute; inset:-1px; border-radius:22px; padding:1px;
+              background:linear-gradient(135deg, rgba(139,92,246,.45), rgba(34,211,238,.45));
+              -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+              -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; opacity:.25; transition:opacity .25s;
+            }
+            .card:hover{ transform:translateY(-6px); box-shadow:0 28px 60px -24px rgba(34,211,238,.28); }
+            .card:hover::before{ opacity:.5; }
+            .thumb{ position:relative; aspect-ratio:16/9; border-radius:16px; overflow:hidden; background:#0b1220; border:1px solid var(--card-border); }
+            .thumb img{ width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05) contrast(1.05) brightness(.98); transform:scale(1.02); transition:transform .35s, filter .35s; }
+            .card:hover .thumb img{ transform:scale(1.06); filter:saturate(1.1); }
+            .play{ position:absolute; inset:0; display:grid; place-items:center; background:linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.25)); }
+            .play .btn{
+              display:inline-grid; place-items:center; width:64px; height:64px; border-radius:9999px;
+              background:linear-gradient(135deg, var(--danger), #dc2626); box-shadow:0 14px 30px -10px rgba(239,68,68,.5); transition:transform .2s, box-shadow .2s;
+            }
+            .card:hover .play .btn{ transform:scale(1.06); }
+            .play svg{ width:28px;height:28px;color:white; }
+            .title{ font-weight:800; font-size:1.1rem; letter-spacing:.2px; }
+            .desc{ color:var(--fg); opacity:.9; line-height:1.6; font-size:.95rem; }
+            .cta{
+              display:inline-block; align-self:center; margin-top:4px; padding:12px 18px; border-radius:12px; font-weight:700; text-decoration:none; color:#0b1220;
+              background-image:linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow:0 18px 34px -16px rgba(139,92,246,.45); transition:transform .2s, filter .2s;
+            }
+            .cta:hover{ transform:translateY(-2px); filter:brightness(1.05); }
+            .actions{ display:flex; justify-content:center; gap:14px; margin-top:32px; flex-wrap:wrap; }
+            .ghost{ display:inline-block; padding:12px 16px; border-radius:12px; text-decoration:none; color:var(--fg); font-weight:700; border:1px solid var(--card-border); background:rgba(255,255,255,.02); }
+            .fade{ opacity:0; transform:translateY(14px); transition:.6s ease; }
+            .fade.show{ opacity:1; transform:none; }
+          </style>
+        </head>
+        <body>
+          <div class="wrap">
+            <div class="logo">E</div>
+            <h1 class="fade">Videos Demostrativos</h1>
+            <p class="subtitle fade">Muestras del uso de IA, chatbot y gamificación para la transformación digital de la CGR.</p>
+        
+            <section class="grid">
+              <article class="card fade">
+                <a class="thumb" href="https://youtu.be/TT2gtmTExy4" target="_blank" rel="noopener noreferrer" aria-label="Ver IA para Búsqueda Inteligente">
+                  <img src="https://img.youtube.com/vi/TT2gtmTExy4/hqdefault.jpg" alt="Miniatura: IA para Búsqueda Inteligente">
+                  <div class="play"><span class="btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+                </a>
+                <div class="title">IA para Búsqueda Inteligente</div>
+                <p class="desc">Propuesta para búsqueda de antecedentes en procedimientos sancionadores con soporte de RAG y modelos generativos.</p>
+                <a class="cta" href="https://youtu.be/TT2gtmTExy4" target="_blank" rel="noopener noreferrer">Ver en YouTube</a>
+              </article>
+        
+              <article class="card fade">
+                <a class="thumb" href="https://youtu.be/yJe-dNBiZdM" target="_blank" rel="noopener noreferrer" aria-label="Ver Gamificación para Validación">
+                  <img src="https://img.youtube.com/vi/yJe-dNBiZdM/hqdefault.jpg" alt="Miniatura: Gamificación para Validación">
+                  <div class="play"><span class="btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+                </a>
+                <div class="title">Gamificación para Validación</div>
+                <p class="desc">Mecánicas de puntos, logros y rankings para validar y mejorar los datos que alimentan la IA institucional.</p>
+                <a class="cta" href="https://youtu.be/yJe-dNBiZdM" target="_blank" rel="noopener noreferrer">Ver en YouTube</a>
+              </article>
+        
+              <article class="card fade">
+                <a class="thumb" href="https://youtu.be/5KYVLAw2Yb8" target="_blank" rel="noopener noreferrer" aria-label="Ver Chatbot - Consultas inteligentes">
+                  <img src="https://img.youtube.com/vi/5KYVLAw2Yb8/hqdefault.jpg" alt="Miniatura: Chatbot consultas inteligentes">
+                  <div class="play"><span class="btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+                </a>
+                <div class="title">Chatbot – Consultas inteligentes</div>
+                <p class="desc">Interacción natural para consultar resoluciones en la base RAG y obtener respuestas estructuradas.</p>
+                <a class="cta" href="https://youtu.be/5KYVLAw2Yb8" target="_blank" rel="noopener noreferrer">Ver en YouTube</a>
+              </article>
+        
+              <article class="card fade">
+                <a class="thumb" href="https://youtube.com/playlist?list=PLrkXOQC4SfiX4fE_HoIq4TwJ7FmaUPZc9&si=aJ_apRab5hBJorjL" target="_blank" rel="noopener noreferrer" aria-label="Abrir lista de reproducción">
+                  <img src="media/Miniatura.jpg" alt="Lista de reproducción del proyecto">
+                  <div class="play"><span class="btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+                </a>
+                <div class="title">Lista de reproducción</div>
+                <p class="desc">Accede a todos los videos del proyecto desde una única lista curada.</p>
+                <a class="cta" href="https://youtube.com/playlist?list=PLrkXOQC4SfiX4fE_HoIq4TwJ7FmaUPZc9&si=aJ_apRab5hBJorjL" target="_blank" rel="noopener noreferrer">Abrir playlist</a>
+              </article>
+            </section>
+        
+            <div class="actions fade">
+              <a class="ghost" href="https://eurekacgr.github.io/eureka/" rel="noopener">← Volver al sitio</a>
+            </div>
+          </div>
+        
+          <script>
+            // Efecto de aparición
+            const els = document.querySelectorAll('.fade');
+            const io = new IntersectionObserver((entries)=>{
+              entries.forEach(e=>{
+                if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+              });
+            },{threshold:0.1});
+            els.forEach(el=>io.observe(el));
+          <\/script>
+        </body>
+        </html>`);
+          doc.close();
+        }
+        </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(30, 58, 138, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(30, 58, 138, 0.6); }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .gradient-cgr {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 35%, #3b82f6 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 6s ease-in-out infinite;
+        }
+        
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-premium {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .card-premium:hover::before {
+            left: 100%;
+        }
+        
+        .card-premium:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border-color: #1e40af;
+        }
+        
+        .btn-cgr {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-cgr:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(30, 58, 138, 0.4);
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .floating-elements::before,
+        .floating-elements::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+        
+        .floating-elements::before {
+            top: 10%;
+            left: 10%;
+            background: radial-gradient(circle, #1e40af, transparent);
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-elements::after {
+            bottom: 10%;
+            right: 10%;
+            background: radial-gradient(circle, #3b82f6, transparent);
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        .tech-grid {
+            background-image: 
+                linear-gradient(rgba(30, 64, 175, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30, 64, 175, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+    </style>
 </head>
-<body>
-  <div class="wrap">
-    <div class="logo">E</div>
-    <h1>Videos Demostrativos</h1>
-    <p class="subtitle">Muestras del uso de IA, chatbot y gamificación para la transformación digital de la CGR.</p>
 
-    <section class="grid">
-      <article class="card">
-        <a class="thumb" href="https://youtu.be/TT2gtmTExy4" target="_blank" rel="noopener">
-          <img src="https://img.youtube.com/vi/TT2gtmTExy4/hqdefault.jpg" alt="IA para Búsqueda Inteligente">
-          <div class="play"><span class="btnP" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
-          </span></div>
-        </a>
-        <div class="title">IA para Búsqueda Inteligente</div>
-        <p class="desc">Propuesta para búsqueda de antecedentes con RAG y modelos generativos.</p>
-        <a class="cta" href="https://youtu.be/TT2gtmTExy4" target="_blank" rel="noopener">Ver en YouTube</a>
-      </article>
-
-      <article class="card">
-        <a class="thumb" href="https://youtu.be/yJe-dNBiZdM" target="_blank" rel="noopener">
-          <img src="https://img.youtube.com/vi/yJe-dNBiZdM/hqdefault.jpg" alt="Gamificación para Validación">
-          <div class="play"><span class="btnP" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
-          </span></div>
-        </a>
-        <div class="title">Gamificación para Validación</div>
-        <p class="desc">Mecánicas de puntos, logros y rankings para validar datos de IA.</p>
-        <a class="cta" href="https://youtu.be/yJe-dNBiZdM" target="_blank" rel="noopener">Ver en YouTube</a>
-      </article>
-
-      <article class="card">
-        <a class="thumb" href="https://youtu.be/5KYVLAw2Yb8" target="_blank" rel="noopener">
-          <img src="https://img.youtube.com/vi/5KYVLAw2Yb8/hqdefault.jpg" alt="Chatbot - Consultas inteligentes">
-          <div class="play"><span class="btnP" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
-          </span></div>
-        </a>
-        <div class="title">Chatbot – Consultas inteligentes</div>
-        <p class="desc">Interacción natural para consultar resoluciones en la base RAG.</p>
-        <a class="cta" href="https://youtu.be/5KYVLAw2Yb8" target="_blank" rel="noopener">Ver en YouTube</a>
-      </article>
-
-      <article class="card">
-        <a class="thumb" href="https://youtube.com/playlist?list=PLrkXOQC4SfiX4fE_HoIq4TwJ7FmaUPZc9" target="_blank" rel="noopener">
-          <!-- Usa tu miniatura propia del repo -->
-          <img src="media/Miniatura.jpg" alt="Lista de reproducción del proyecto">
-          <div class="play"><span class="btnP" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg>
-          </span></div>
-        </a>
-        <div class="title">Lista de reproducción</div>
-        <p class="desc">Accede a todos los videos del proyecto desde una única lista.</p>
-        <a class="cta" href="https://youtube.com/playlist?list=PLrkXOQC4SfiX4fE_HoIq4TwJ7FmaUPZc9" target="_blank" rel="noopener">Abrir playlist</a>
-      </article>
-    </section>
-
-    <div class="actions"><a class="ghost" href="https://eurekacgr.github.io/eureka/">← Volver al sitio</a></div>
-  </div>
-<\/script>
-</body>
-</html>`);
-      doc.close();
-    }
-  </script>
-</head>
-
-<body class="font-body bg-[#f7f9fc] overflow-x-hidden">
-  <!-- NAV -->
-  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-[color:var(--cgr-gris-claro)]">
-    <div class="container mx-auto px-6 py-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white"
-               style="background-image:linear-gradient(135deg,var(--cgr-azul),var(--cgr-celeste));">
-            <span class="font-bold text-lg">E</span>
-          </div>
-          <span class="font-display font-bold text-xl text-gray-800">EUREKA CGR</span>
-        </div>
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="#recursos" class="text-gray-600 hover:text-[color:var(--cgr-azul)] font-medium">Recursos</a>
-          <a href="#demos" class="text-gray-600 hover:text-[color:var(--cgr-azul)] font-medium">Demos</a>
-          <a href="#equipo" class="text-gray-600 hover:text-[color:var(--cgr-azul)] font-medium">Equipo</a>
-          <a href="#contacto" class="text-gray-600 hover:text-[color:var(--cgr-azul)] font-medium">Contacto</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="relative min-h-screen flex items-center justify-center gradient-cgr text-white overflow-hidden">
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="text-center max-w-5xl mx-auto">
-        <div class="mb-6 slide-down">
-          <div class="inline-flex items-center justify-center w-24 h-24 glass rounded-3xl">
-            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-            </svg>
-          </div>
-        </div>
-
-        <h1 class="font-display font-black text-6xl md:text-8xl leading-none fade-in">
-          <span class="bg-clip-text text-transparent"
-                style="background-image:linear-gradient(90deg,#fff,rgba(255,255,255,.9));">
-            EUREKA
-          </span>
-        </h1>
-
-        <p class="text-2xl md:text-3xl font-light mt-4 slide-up">
-          <span class="font-semibold" style="color:var(--cgr-amarillo)">IA y Gamificación</span> para la
-        </p>
-        <p class="text-2xl md:text-3xl font-light mb-10 slide-up">
-          <span class="font-semibold" style="color:var(--cgr-azul-claro)">Contraloría General</span> de la
-          <span class="font-semibold" style="color:var(--cgr-verde-suave)">República</span>
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center slide-up">
-          <a href="#demos" class="btn-cgr px-10 py-4 rounded-2xl text-lg shadow-2xl">
-            Explorar Demos
-          </a>
-          <a href="#recursos" class="btn-sec px-10 py-4 rounded-2xl text-lg shadow-2xl">
-            Ver Recursos
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RECURSOS -->
-  <section id="recursos" class="py-24 tech-grid relative">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="font-display font-bold text-5xl text-gray-800 mb-4">
-          Entregables del <span style="color:var(--cgr-azul)">Proyecto</span>
-        </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Investigación + desarrollo tecnológico + validación práctica, con identidad CGR.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-8">
-        <!-- RAG -->
-        <div class="card-premium rounded-3xl p-8 text-center">
-          <div class="mb-6">
-            <div class="w-20 h-20 badge-azul rounded-3xl flex items-center justify-center mx-auto">
-              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
-            </div>
-          </div>
-          <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Sistema RAG Funcional</h3>
-          <p class="text-gray-600 text-sm mb-5">
-            Meta: procesamiento inteligente de procedimientos sancionatorios con un modelo de IA especializado.
-          </p>
-          <button onclick="openRAGDemo()" class="btn-sec w-full py-3 rounded-xl">Acceder al Sistema</button>
-        </div>
-
-        <!-- Asistente -->
-        <div class="card-premium rounded-3xl p-8 text-center">
-          <div class="mb-6">
-            <div class="w-20 h-20 badge-verde rounded-3xl flex items-center justify-center mx-auto">
-              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
-            </div>
-          </div>
-          <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Asistente EUREKA</h3>
-          <p class="text-gray-600 text-sm">
-            Consulta detalles, alcances y objetivos. Busca el ícono de chat en el sitio.
-          </p>
-        </div>
-
-        <!-- Presentación -->
-        <div class="card-premium rounded-3xl p-8 text-center">
-          <div class="mb-6">
-            <div class="w-20 h-20 badge-azul rounded-3xl flex items-center justify-center mx-auto">
-              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2M7 4h10M7 4l-2 16h14L17 4M9 9v8M15 9v8"></path>
-              </svg>
-            </div>
-          </div>
-          <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Presentación Ejecutiva</h3>
-          <p class="text-gray-600 text-sm mb-5">
-            Pitch deck: visión estratégica, modelo, roadmap e impacto para la CGR.
-          </p>
-          <button onclick="openPresentacion()" class="btn-sec w-full py-3 rounded-xl">Ver Presentación</button>
-        </div>
-
-        <!-- Zona Gamer -->
-        <div class="card-premium rounded-3xl p-8 text-center">
-          <div class="mb-6">
-            <div class="w-20 h-20 badge-amar rounded-3xl flex items-center justify-center mx-auto">
-              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
-              </svg>
-            </div>
-          </div>
-          <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Zona Gamer</h3>
-          <p class="text-gray-600 text-sm mb-5">
-            Juego espacial para validar datos extraídos por IA mientras ganas puntos y logros.
-          </p>
-          <button onclick="openZonaGamer()" class="btn-cgr w-full py-3 rounded-xl">Jugar Ahora</button>
-        </div>
-
-        <!-- Video Explicativo -->
-        <div class="card-premium rounded-3xl p-8 text-center">
-          <div class="mb-6">
-            <div class="w-20 h-20 badge-amar rounded-3xl flex items-center justify-center mx-auto">
-              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-              </svg>
-            </div>
-          </div>
-          <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Video Explicativo</h3>
-          <p class="text-gray-600 text-sm mb-5">
-            Presentación audiovisual de EUREKA, su metodología e impacto en la modernización.
-          </p>
-          <button onclick="openVideoExplicativo()" class="btn-cgr w-full py-3 rounded-xl">Ver Video</button>
-        </div>
-
-        <!-- Código Fuente -->
-        <div class="card-premium rounded-3xl p-8 text-center">
-          <div class="mb-6">
-            <div class="w-20 h-20"
-                 style="background-image:linear-gradient(135deg,#5a6b7a,var(--cgr-gris));"
-                 class="rounded-3xl flex items-center justify-center mx-auto">
-              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-              </svg>
-            </div>
-          </div>
-          <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Código Fuente</h3>
-          <p class="text-gray-600 text-sm mb-5">
-            Explora el GitHub del proyecto (juego y extractor). Código abierto y documentado.
-          </p>
-          <button onclick="openCodigoFuente()" class="btn-sec w-full py-3 rounded-xl">Ver Repositorio</button>
-        </div>
-
-        <!-- Videos -->
-        <div class="card-premium rounded-3xl p-8 text-center">
-          <div class="mb-6">
-            <div class="w-20 h-20 badge-azul rounded-3xl flex items-center justify-center mx-auto">
-              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-              </svg>
-            </div>
-          </div>
-          <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Videos Demostrativos</h3>
-          <p class="text-gray-600 text-sm mb-5">
-            Visita los videos sobre búsqueda inteligente, gamificación y chatbot.
-          </p>
-          <button onclick="openVideosDemostrativos()" class="btn-sec w-full py-3 rounded-xl">Ver Videos</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DEMOS -->
-  <section id="demos" class="py-24" style="background:linear-gradient(135deg,#ffffff 0%, var(--cgr-fondo-suave) 100%);">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-14">
-        <h2 class="font-display font-bold text-4xl md:text-5xl text-gray-800 mb-4">
-          Demos <span style="color:var(--cgr-azul)">Interactivos</span>
-        </h2>
-        <p class="text-xl text-gray-600">Experimenta EUREKA en acción</p>
-      </div>
-
-      <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-        <!-- Demo RAG -->
-        <div class="card-premium rounded-3xl p-8 text-center">
-          <div class="mb-6">
-            <div class="w-20 h-20 badge-azul rounded-3xl flex items-center justify-center mx-auto">
-              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
-            </div>
-          </div>
-          <h3 class="font-display font-bold text-2xl text-gray-800 mb-3">Sistema RAG Funcional</h3>
-          <p class="text-gray-600 mb-6">
-            Interactúa con el sistema que extrae y organiza antecedentes a partir de resoluciones.
-          </p>
-          <button onclick="openRAGDemo()" class="btn-sec w-full py-4 rounded-2xl">Probar Sistema RAG</button>
-        </div>
-
-        <!-- Demo Juego -->
-        <div class="card-premium rounded-3xl p-8 text-center">
-          <div class="mb-6">
-            <div class="w-20 h-20 badge-amar rounded-3xl flex items-center justify-center mx-auto">
-              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.01M15 10h1.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </div>
-          </div>
-          <h3 class="font-display font-bold text-2xl text-gray-800 mb-3">Cadete de la Verificación</h3>
-          <p class="text-gray-600 mb-6">
-            Gamificación para validar información: puntos, logros y ranking.
-          </p>
-          <button onclick="openGameDemo()" class="btn-cgr w-full py-4 rounded-2xl">Jugar Demo</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EQUIPO -->
-  <section id="equipo" class="py-24 bg-white">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-12">
-        <h2 class="font-display font-bold text-4xl md:text-5xl text-gray-800 mb-3">
-          Nuestro <span style="color:var(--cgr-azul)">Equipo</span>
-        </h2>
-        <p class="text-xl text-gray-600">Talento comprometido con la transformación digital</p>
-      </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">                
-            <div class="card-premium rounded-3xl p-8 text-center group">
-                <div class="mb-6">
-                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-2xl group-hover:shadow-cgr-500/25 transition-all duration-300 bg-gradient-to-br from-gray-200 to-gray-300">
-                        <img src="https://drive.google.com/thumbnail?id=1-fuLrBN2ELv-85vZ0ft2zErv2iRN2pis&sz=w512" 
-                             alt="Rojas Barrantes José Pablo" 
-                             class="w-full h-full object-contain bg-white"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">                            
-                        <div class="w-full h-full bg-cgr-500 flex items-center justify-center text-white text-2xl font-bold" style="display: none;">
-                             RB
-                        </div>
+<body class="font-body bg-gray-50 overflow-x-hidden">
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-cgr-500 to-cgr-600 rounded-xl flex items-center justify-center animate-pulse-glow">
+                        <span class="text-white font-bold text-lg">E</span>
                     </div>
+                    <span class="font-display font-bold text-xl text-gray-800">EUREKA CGR</span>
                 </div>
-                <h3 class="font-display font-bold text-xl text-gray-800 mb-2">José Pablo Rojas Barrantes</h3>
-                <p class="text-cgr-600 font-medium mb-4">Equipo EUREKA</p>
-                <div class="flex justify-center space-x-3">
-                    <div class="w-8 h-8 bg-cgr-100 rounded-lg flex items-center justify-center">
-                        <svg class="w-4 h-4 text-cgr-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#recursos" class="text-gray-600 hover:text-cgr-500 font-medium transition-colors">Recursos</a>
+                    <a href="#demos" class="text-gray-600 hover:text-cgr-500 font-medium transition-colors">Demos</a>
+                    <a href="#equipo" class="text-gray-600 hover:text-cgr-500 font-medium transition-colors">Equipo</a>
+                    <a href="#contacto" class="text-gray-600 hover:text-cgr-500 font-medium transition-colors">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex items-center justify-center gradient-cgr text-white overflow-hidden">
+        <div class="floating-elements"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center max-w-5xl mx-auto">
+                <div class="mb-8 animate-slide-down">
+                    <div class="inline-flex items-center justify-center w-24 h-24 glass-morphism rounded-3xl mb-6">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                         </svg>
                     </div>
                 </div>
-            </div>
 
-             <div class="card-premium rounded-3xl p-8 text-center group">
-                 <div class="mb-6">
-                     <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-2xl group-hover:shadow-cgr-500/25 transition-all duration-300 bg-gradient-to-br from-gray-200 to-gray-300">
-                         <img src="https://drive.google.com/thumbnail?id=1uroy91lpg6E3WV0E_A3DImANHNZrUYfD&sz=w512" 
-                              alt="Molina Campos Jonathan Andrey" 
-                              class="w-full h-full object-contain bg-white"
-                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">                            
-                         <div class="w-full h-full bg-cgr-500 flex items-center justify-center text-white text-2xl font-bold" style="display: none;">
-                              MC
-                         </div>
-                    </div>
-                </div>
-                <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Jonathan Andrey Molina Campos</h3>
-                <p class="text-cgr-600 font-medium mb-4">Equipo EUREKA</p>
-                <div class="flex justify-center space-x-3">
-                    <div class="w-8 h-8 bg-cgr-100 rounded-lg flex items-center justify-center">
-                        <svg class="w-4 h-4 text-cgr-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
+                <h1 class="font-display font-black text-6xl md:text-8xl lg:text-9xl mb-6 animate-fade-in leading-none">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-cyan-100">
+                        EUREKA
+                    </span>
+                </h1>
+                
+                <p class="text-2xl md:text-3xl lg:text-4xl font-light mb-4 animate-slide-up opacity-90 leading-relaxed">
+                    <span class="font-semibold text-yellow-300">IA y Gamificación</span> para la
+                </p>
+                <p class="text-2xl md:text-3xl lg:text-4xl font-light mb-12 animate-slide-up opacity-90 leading-relaxed">
+                    <span class="font-semibold text-blue-300">Contraloría General</span> de la <span class="font-semibold text-green-300">República</span>
+                </p>
 
-            <div class="card-premium rounded-3xl p-8 text-center group">
-                <div class="mb-6">
-                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-2xl group-hover:shadow-cgr-500/25 transition-all duration-300 bg-gradient-to-br from-gray-200 to-gray-300">
-                        <img src="https://drive.google.com/thumbnail?id=1zA7h1mp2dg_U09RfhPsML57FXHlQwekI&sz=w512" 
-                             alt="Jiménez García Pedro" 
-                             class="w-full h-full object-contain bg-white"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">                            
-                        <div class="w-full h-full bg-cgr-500 flex items-center justify-center text-white text-2xl font-bold" style="display: none;">
-                            JG
-                        </div>
-                    </div>
+                <div class="max-w-3xl mx-auto mb-12 animate-slide-up" style="animation-delay: 0.2s;">
+                    <p class="text-xl md:text-2xl font-light opacity-90 leading-relaxed">
+                        Nuestra propuesta combina Inteligencia Artificial con validación humana gamificada, 
+                        queremos fomentar tecnología potenciadora mediante sostenibilidad humana...todos y todas están invitados a aportar...todos y todas están convocados a jugar...
+                    </p>
                 </div>
-                <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Pedro Jiménez García</h3>
-                <p class="text-cgr-600 font-medium mb-4">Equipo EUREKA</p>
-                <div class="flex justify-center space-x-3">
-                    <div class="w-8 h-8 bg-cgr-100 rounded-lg flex items-center justify-center">
-                        <svg class="w-4 h-4 text-cgr-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
 
-            <div class="card-premium rounded-3xl p-8 text-center group">
-                <div class="mb-6">
-                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-2xl group-hover:shadow-cgr-500/25 transition-all duration-300 bg-gradient-to-br from-gray-200 to-gray-300">                            
-                        <img src="https://drive.google.com/thumbnail?id=17hr3Xz1lfGcDOKe_yFgoaMSUDoJS-joI&sz=w512" 
-                             alt="Ruiz Miranda Brandon José" 
-                             class="w-full h-full object-contain bg-white"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">                            
-                        <div class="w-full h-full bg-cgr-500 flex items-center justify-center text-white text-2xl font-bold" style="display: none;">
-                            RM
-                        </div>
-                    </div>
-                </div>                    
-                <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Brandon José Ruiz Miranda</h3>
-                <p class="text-cgr-600 font-medium mb-4">Equipo EUREKA</p>                    
-                <div class="flex justify-center space-x-3">
-                    <a href="https://www.linkedin.com/in/tu-perfil" target="_blank"
-                       class="w-8 h-8 bg-cgr-100 rounded-lg flex items-center justify-center hover:bg-cgr-200 transition">
-                        <svg class="w-4 h-4 text-cgr-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
-                        </svg>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center animate-slide-up" style="animation-delay: 0.4s;">
+                    <a href="#demos" class="btn-cgr text-white font-semibold px-10 py-4 rounded-2xl text-lg shadow-2xl hover:shadow-cgr-500/25 transition-all duration-300">
+                        <span class="flex items-center">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.01M15 10h1.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Explorar Demos
+                        </span>
+                    </a>
+                    <a href="#recursos" class="glass-morphism text-white font-semibold px-10 py-4 rounded-2xl text-lg hover:bg-white/20 transition-all duration-300">
+                        <span class="flex items-center">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Ver Recursos
+                        </span>
                     </a>
                 </div>
-            </div>
 
-            <div class="card-premium rounded-3xl p-8 text-center group">
-                <div class="mb-6">
-                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-2xl group-hover:shadow-cgr-500/25 transition-all duration-300 bg-gradient-to-br from-gray-200 to-gray-300">
-                        <img src="https://drive.google.com/thumbnail?id=1ouYuGLgJRnDRvP89c3uhoBZdn5OT8mVL&sz=w512" 
-                             alt="Maroto Gutiérrez Carlos Alberto" 
-                             class="w-full h-full object-contain bg-white"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">                            
-                        <div class="w-full h-full bg-cgr-500 flex items-center justify-center text-white text-2xl font-bold" style="display: none;">
-                            MG
-                        </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 animate-slide-up" style="animation-delay: 0.6s;">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">50+</div>
+                        <div class="text-sm opacity-80 uppercase tracking-wider">Documentos</div>
                     </div>
-                </div>
-                <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Carlos Alberto Maroto Gutiérrez</h3>
-                <p class="text-cgr-600 font-medium mb-4">Equipo EUREKA</p>
-                <div class="flex justify-center space-x-3">
-                    <div class="w-8 h-8 bg-cgr-100 rounded-lg flex items-center justify-center">
-                        <svg class="w-4 h-4 text-cgr-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
-                        </svg>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">RAG</div>
+                        <div class="text-sm opacity-80 uppercase tracking-wider">Sistema IA</div>
                     </div>
-                </div>
-            </div>
-
-            <div class="card-premium rounded-3xl p-8 text-center group">
-                <div class="mb-6">
-                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-2xl group-hover:shadow-cgr-500/25 transition-all duration-300 bg-gradient-to-br from-gray-200 to-gray-300">
-                        <img src="https://drive.google.com/thumbnail?id=1H68UIac7Wg-7ZVqZbuiVay57z3iR-EMb&sz=w512" 
-                             alt="Monge Solano Sugey Elisa" 
-                             class="w-full h-full object-contain bg-white"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">                            
-                        <div class="w-full h-full bg-cgr-500 flex items-center justify-center text-white text-2xl font-bold" style="display: none;">
-                            MS
-                        </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">100%</div>
+                        <div class="text-sm opacity-80 uppercase tracking-wider">Validación</div>
                     </div>
-                </div>
-                <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Sugey Elisa Monge Solano</h3>
-                <p class="text-cgr-600 font-medium mb-4">Equipo EUREKA</p>
-                <div class="flex justify-center space-x-3">
-                    <div class="w-8 h-8 bg-cgr-100 rounded-lg flex items-center justify-center">
-                        <svg class="w-4 h-4 text-cgr-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
-                        </svg>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">CGR</div>
+                        <div class="text-sm opacity-80 uppercase tracking-wider">Innovación</div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-  </section>
 
-  <!-- CONTACTO / FOOTER -->
-  <footer id="contacto" class="text-center py-10"
-          style="background: linear-gradient(135deg, var(--cgr-azul) 0%, var(--cgr-celeste) 100%); color:#fff;">
-    <p class="mb-2 font-semibold">© 2024 EUREKA | Contraloría General de la República</p>
-    <a href="mailto:eureka.cgr.cr@gmail.com" class="underline">eureka.cgr.cr@gmail.com</a>
-  </footer>
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-white opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <section id="recursos" class="py-24 tech-grid relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="font-display font-bold text-5xl md:text-6xl text-gray-800 mb-6">
+                    Entregables del <span class="bg-clip-text text-transparent bg-gradient-to-r from-cgr-500 to-blue-500">Proyecto</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Una propuesta completa que combina investigación, desarrollo tecnológico y validación práctica 
+                    para la transformación digital de la CGR.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-16">
+                
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-blue-500/25 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-3">Sistema RAG Funcional</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed text-sm">
+                        Así nos gustaría un sistema de Retrieval-Augmented Generation para procesamiento 
+                        inteligente de procedimientos sancionatorios con un modelo de IA especializado en el tema...esa es nuestra meta.
+                    </p>
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-6">
+                        <p class="text-yellow-800 text-xs">
+                            ⏱️ <strong>Nota:</strong> El sistema puede tardar 1-2 minutos en cargar inicialmente 
+                            ya que utiliza una capa gratuita de Google Cloud.
+                        </p>
+                    </div>
+                    <button onclick="openRAGDemo()" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        Acceder al Sistema
+                    </button>
+                </div>
+
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 rounded-3xl flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-emerald-500/25 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-3">Asistente EUREKA</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        Pregunta a nuestro Asistente EUREKA sobre los detalles, alcances y objetivos de nuestra propuesta. Haz click en el icono de chat azul que aparece en la esquina derecha del sitio, y puedes pregunta ¿Qué es EUREKA?, ¿Cómo puedo participar? entre otros detalles de la propuesta.
+                    </p>
+                </div>
+
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-600 rounded-3xl flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-indigo-500/25 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2M7 4h10M7 4l-2 16h14L17 4M9 9v8M15 9v8"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-3">Presentación Ejecutiva</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed text-sm">
+                        Pitch deck con visión estratégica, modelo de negocio, roadmap de implementación 
+                        y análisis de impacto para la CGR.
+                    </p>
+                    <button onclick="openPresentacion()" class="w-full bg-gradient-to-r from-indigo-500 to-pink-600 text-white font-semibold py-3 rounded-xl hover:from-indigo-600 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        Ver Presentación
+                    </button>
+                </div>
+
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 rounded-3xl flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-orange-500/25 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-3">Zona Gamer</h3>
+                    <h4 class="text-lg text-orange-600 mb-3 font-semibold">Cadete de la Verificación</h4>
+                    <p class="text-gray-600 mb-6 leading-relaxed text-sm">
+                        Juego espacial donde eliminas satélites del imperio mientras validas datos extraídos por IA. 
+                        Una experiencia gamificada que representa la misión de verificación de la CGR.
+                    </p>
+                    <button onclick="openZonaGamer()" class="w-full bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-semibold py-3 rounded-xl hover:from-orange-600 hover:to-yellow-600 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        Jugar Ahora
+                    </button>
+                </div>
+
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-pink-600 rounded-3xl flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-red-500/25 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-3">Video Explicativo</h3>
+                    <div class="flex items-center justify-center mb-3">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full">🇺🇸 En Inglés</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 leading-relaxed text-sm">
+                        Presentación audiovisual completa de la propuesta EUREKA, metodología 
+                        y su impacto en la modernización de la CGR.
+                    </p>
+                    <button onclick="openVideoExplicativo()" class="w-full bg-gradient-to-r from-red-500 to-pink-600 text-white font-semibold py-3 rounded-xl hover:from-red-600 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        Ver Video
+                    </button>
+                </div>
+
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-green-500/25 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-3">Podcast EUREKA</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed text-sm">
+                        Conversación profunda sobre IA y gamificación en la CGR. Metodología, 
+                        visión y el futuro de la fiscalización digital.
+                    </p>
+                    <button onclick="openPodcast()" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold py-3 rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        Escuchar Podcast
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-gray-700 via-gray-600 to-gray-900 rounded-3xl flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-gray-500/25 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-3">Código Fuente</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed text-sm">
+                        Explorar el GitHub del proyecto tanto en el juego como en el extractor de datos 
+                        de resoluciones mediante IA. Código abierto y documentado.
+                    </p>
+                    <button onclick="openCodigoFuente()" class="w-full bg-gradient-to-r from-gray-700 to-gray-900 text-white font-semibold py-3 rounded-xl hover:from-gray-800 hover:to-gray-950 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        Ver Repositorio
+                    </button>
+                </div>
+
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-violet-500 via-purple-500 to-purple-700 rounded-3xl flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-violet-500/25 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-3">Videos Demostrativos</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed text-sm">
+                        Visita los videos demostrativos de nuestra propuesta de IA para búsqueda inteligente 
+                        de antecedentes y gamificación para validación de datos.
+                    </p>
+                    <button onclick="openVideosDemostrativos()" class="w-full bg-gradient-to-r from-violet-500 to-purple-700 text-white font-semibold py-3 rounded-xl hover:from-violet-600 hover:to-purple-800 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        Ver Videos
+                    </button>
+                </div>
+
+    <section id="demos" class="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-gray-800 mb-6">
+                    Demos <span class="text-cgr-500">Interactivos</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Experimenta EUREKA en acción a través de nuestras demostraciones funcionales
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-blue-500/25 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl text-gray-800 mb-4">Sistema RAG Funcional</h3>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Interactúa con nuestro sistema de Retrieval-Augmented Generation que procesa 
+                        documentos reales de la CGR y extrae de forma nteligente y automatizada antecedentes de casos en materia sancionatoria.
+                    </p>
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Extracción automática de metadatos
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Generación de QA para fine-tuning
+                        </div>
+                    </div>
+                    <button onclick="openRAGDemo()" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-4 rounded-2xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <span class="flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                            Probar Sistema RAG
+                        </span>
+                    </button>
+                </div>
+
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 rounded-3xl flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-orange-500/25 transition-all duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl text-gray-800 mb-4">Cadete de la Verificación</h3>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Experimenta la gamificación de la validación de datos. Conviértete en un Cadete 
+                        y valida información extraída por IA mientras ganas puntos y logros.
+                    </p>
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Sistema de puntos y logros
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Validación colaborativa
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Ranking de funcionarios
+                        </div>
+                    </div>
+                    <button onclick="openGameDemo()" class="w-full bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-semibold py-4 rounded-2xl hover:from-orange-600 hover:to-yellow-600 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <span class="flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.01M15 10h1.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Jugar Demo
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-20 max-w-4xl mx-auto">
+                <h3 class="font-display font-bold text-3xl text-gray-800 mb-8 text-center">
+                    Ejemplo de Datos Extraídos
+                </h3>
+                <div class="bg-white rounded-3xl shadow-2xl p-8">
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-lg text-gray-800 mb-2">Resolución CGR 20785-2024</h4>
+                        <p class="text-gray-600 text-sm">Ejemplo de extracción automática de QA para validación humana</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 rounded-2xl p-6">
+                            <h5 class="font-semibold text-blue-800 mb-3">Pregunta Generada por IA</h5>
+                            <p class="text-blue-700 text-sm mb-4">
+                                "¿Cuál fue el fundamento jurídico principal utilizado por la Contraloría para determinar la responsabilidad administrativa?"
+                            </p>
+                            <div class="space-y-2 text-xs text-blue-600">
+                                <div><strong>Categoría:</strong> fundamento_juridico</div>
+                                <div><strong>Método:</strong> LLM (Gemini 1.5)</div>
+                                <div><strong>Tipo:</strong> Técnico</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 rounded-2xl p-6">
+                            <h5 class="font-semibold text-green-800 mb-3">Respuesta Extraída</h5>
+                            <p class="text-green-700 text-sm mb-4">
+                                "Artículo 38 inciso i) de la Ley contra la Corrupción y el Enriquecimiento Ilícito en la Función Pública, No. 8422, por omisión injustificada de presentar la declaración jurada de bienes final..."
+                            </p>
+                            <div class="space-y-2 text-xs text-green-600">
+                                <div><strong>Confianza:</strong> 95%</div>
+                                <div><strong>Tokens:</strong> 2,559</div>
+                                <div><strong>Validación:</strong> Pendiente</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-yellow-50 rounded-xl">
+                        <p class="text-yellow-800 text-sm">
+                            <strong>Proceso de Validación:</strong> Los funcionarios de la CGR validan estas extracciones 
+                            a través del sistema gamificado, mejorando la precisión y creando una base de datos confiable.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipo" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display font-bold text-4xl md:text-5xl text-gray-800 mb-6">
+                    Nuestro <span class="text-cgr-500">Equipo</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    El talento detrás de EUREKA: profesionales comprometidos con la transformación digital de la CGR
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-6">
+                        <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-2xl group-hover:shadow-cgr-500/25 transition-all duration-300 bg-gradient-to-br from-gray-200 to-gray-300">
+                            <img src="https://drive.google.com/thumbnail?id=1-fuLrBN2ELv-85vZ0ft2zErv2iRN2pis&sz=w512" 
+                                 alt="Rojas Barrantes José Pablo" 
+                                 class="w-full h-full object-contain bg-white"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">                            
+                            <div class="w-full h-full bg-cgr-500 flex items-center justify-center text-white text-2xl font-bold" style="display: none;">
+                                RB
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-2">José Pablo Rojas Barrantes</h3>
+                    <p class="text-cgr-600 font-medium mb-4">Equipo EUREKA</p>
+                    <div class="flex justify-center space-x-3">
+                        <div class="w-8 h-8 bg-cgr-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-cgr-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-6">
+                        <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-2xl group-hover:shadow-cgr-500/25 transition-all duration-300 bg-gradient-to-br from-gray-200 to-gray-300">
+                            <img src="https://drive.google.com/thumbnail?id=1uroy91lpg6E3WV0E_A3DImANHNZrUYfD&sz=w512" 
+                                 alt="Molina Campos Jonathan Andrey" 
+                                 class="w-full h-full object-contain bg-white"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">                            
+                            <div class="w-full h-full bg-cgr-500 flex items-center justify-center text-white text-2xl font-bold" style="display: none;">
+                                MC
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Jonathan Andrey Molina Campos</h3>
+                    <p class="text-cgr-600 font-medium mb-4">Equipo EUREKA</p>
+                    <div class="flex justify-center space-x-3">
+                        <div class="w-8 h-8 bg-cgr-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-cgr-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-6">
+                        <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-2xl group-hover:shadow-cgr-500/25 transition-all duration-300 bg-gradient-to-br from-gray-200 to-gray-300">
+                            <img src="https://drive.google.com/thumbnail?id=1zA7h1mp2dg_U09RfhPsML57FXHlQwekI&sz=w512" 
+                                 alt="Jiménez García Pedro" 
+                                 class="w-full h-full object-contain bg-white"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">                            
+                            <div class="w-full h-full bg-cgr-500 flex items-center justify-center text-white text-2xl font-bold" style="display: none;">
+                                JG
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Pedro Jiménez García</h3>
+                    <p class="text-cgr-600 font-medium mb-4">Equipo EUREKA</p>
+                    <div class="flex justify-center space-x-3">
+                        <div class="w-8 h-8 bg-cgr-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-cgr-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-6">
+                        <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-2xl group-hover:shadow-cgr-500/25 transition-all duration-300 bg-gradient-to-br from-gray-200 to-gray-300">                            
+                            <img src="https://drive.google.com/thumbnail?id=17hr3Xz1lfGcDOKe_yFgoaMSUDoJS-joI&sz=w512" 
+                                 alt="Ruiz Miranda Brandon José" 
+                                 class="w-full h-full object-contain bg-white"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">                            
+                            <div class="w-full h-full bg-cgr-500 flex items-center justify-center text-white text-2xl font-bold" style="display: none;">
+                                RM
+                            </div>
+                        </div>
+                    </div>                    
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Brandon José Ruiz Miranda</h3>
+                    <p class="text-cgr-600 font-medium mb-4">Equipo EUREKA</p>                    
+                    <div class="flex justify-center space-x-3">
+                        <a href="https://www.linkedin.com/in/tu-perfil" target="_blank"
+                           class="w-8 h-8 bg-cgr-100 rounded-lg flex items-center justify-center hover:bg-cgr-200 transition">
+                            <svg class="w-4 h-4 text-cgr-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-6">
+                        <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-2xl group-hover:shadow-cgr-500/25 transition-all duration-300 bg-gradient-to-br from-gray-200 to-gray-300">
+                            <img src="https://drive.google.com/thumbnail?id=1ouYuGLgJRnDRvP89c3uhoBZdn5OT8mVL&sz=w512" 
+                                 alt="Maroto Gutiérrez Carlos Alberto" 
+                                 class="w-full h-full object-contain bg-white"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">                            
+                            <div class="w-full h-full bg-cgr-500 flex items-center justify-center text-white text-2xl font-bold" style="display: none;">
+                                MG
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Carlos Alberto Maroto Gutiérrez</h3>
+                    <p class="text-cgr-600 font-medium mb-4">Equipo EUREKA</p>
+                    <div class="flex justify-center space-x-3">
+                        <div class="w-8 h-8 bg-cgr-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-cgr-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-premium rounded-3xl p-8 text-center group">
+                    <div class="mb-6">
+                        <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-2xl group-hover:shadow-cgr-500/25 transition-all duration-300 bg-gradient-to-br from-gray-200 to-gray-300">
+                            <img src="https://drive.google.com/thumbnail?id=1H68UIac7Wg-7ZVqZbuiVay57z3iR-EMb&sz=w512" 
+                                 alt="Monge Solano Sugey Elisa" 
+                                 class="w-full h-full object-contain bg-white"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">                            
+                            <div class="w-full h-full bg-cgr-500 flex items-center justify-center text-white text-2xl font-bold" style="display: none;">
+                                MS
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-gray-800 mb-2">Sugey Elisa Monge Solano</h3>
+                    <p class="text-cgr-600 font-medium mb-4">Equipo EUREKA</p>
+                    <div class="flex justify-center space-x-3">
+                        <div class="w-8 h-8 bg-cgr-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-cgr-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 grid md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-cgr-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-800 mb-2">6</div>
+                    <div class="text-sm text-gray-600 uppercase tracking-wider">Integrantes</div>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                        </svg>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-800 mb-2">100%</div>
+                    <div class="text-sm text-gray-600 uppercase tracking-wider">Innovación</div>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                        </svg>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-800 mb-2">CGR</div>
+                    <div class="text-sm text-gray-600 uppercase tracking-wider">Compromiso</div>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-800 mb-2">2025</div>
+                    <div class="text-sm text-gray-600 uppercase tracking-wider">Innovatón</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-gray-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cgr-500 to-blue-500"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">
+                    Stack Tecnológico <span class="text-blue-400">Avanzado</span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Infraestructura moderna y escalable diseñada específicamente para las necesidades de la CGR
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-morphism rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h4 class="font-semibold text-lg mb-2">Inteligencia Artificial</h4>
+                    <p class="text-gray-300 text-sm">Gemini 1.5, RAG, Vector DB, Fine-tuning</p>
+                </div>
+                <div class="glass-morphism rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-4">🎮</div>
+                    <h4 class="font-semibold text-lg mb-2">Gamificación</h4>
+                    <p class="text-gray-300 text-sm">Sistema de puntos, logros, rankings</p>
+                </div>
+                <div class="glass-morphism rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h4 class="font-semibold text-lg mb-2">Procesamiento</h4>
+                    <p class="text-gray-300 text-sm">Python, FastAPI, PostgreSQL</p>
+                </div>
+                <div class="glass-morphism rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-4">☁️</div>
+                    <h4 class="font-semibold text-lg mb-2">Infraestructura</h4>
+                    <p class="text-gray-300 text-sm">Google Cloud, Kubernetes, Docker</p>
+                </div>
+            </div>
+
+            <div class="mt-16 max-w-4xl mx-auto">
+                <h3 class="font-display font-bold text-3xl text-center mb-8">Metodología EUREKA</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div>
+                        <h4 class="font-semibold text-lg mb-2">Extracción IA</h4>
+                        <p class="text-gray-300 text-sm">Procesamiento automático de documentos CGR con LLM para generar datos QA</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">2</div>
+                        <h4 class="font-semibold text-lg mb-2">Validación Gamificada</h4>
+                        <p class="text-gray-300 text-sm">Funcionarios validan datos a través de mecánicas de juego colaborativas</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">3</div>
+                        <h4 class="font-semibold text-lg mb-2">Base de Conocimiento</h4>
+                        <p class="text-gray-300 text-sm">Construcción de base de datos institucional robusta y accesible</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl p-12 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-cgr-100 to-transparent rounded-full transform translate-x-32 -translate-y-32"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="text-center mb-12">
+                            <h2 class="font-display font-bold text-4xl md:text-5xl text-gray-800 mb-6">
+                                ¿Listo para <span class="text-cgr-500">Transformar</span> la CGR?
+                            </h2>
+                            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                                Nuestro equipo está preparado para implementar EUREKA y llevar la Contraloría 
+                                General de la República hacia el futuro digital.
+                            </p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8 mb-12">
+                            <div class="space-y-6">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-cgr-100 rounded-xl flex items-center justify-center mr-4">
+                                        <svg class="w-6 h-6 text-cgr-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">Equipo EUREKA</h4>
+                                        <p class="text-gray-600">eureka.cgr.cr@gmail.com</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+                                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H9m0 0H5m0 0h2M7 7h10M7 11h10M7 15h10"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">Innovatón CGR 2025</h4>
+                                        <p class="text-gray-600">Contraloría General de la República</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-4">
+                                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">Estado del Proyecto</h4>
+                                        <p class="text-gray-600">Prototipo funcional completado</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <h4 class="font-semibold text-gray-800 mb-4">Cronología del Proyecto</h4>
+                                <div class="space-y-3 text-sm text-gray-600">
+                                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                        <span>Investigación y Diseño</span>
+                                        <span class="text-green-500 font-medium">✓ Completado</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                        <span>Desarrollo del Prototipo</span>
+                                        <span class="text-green-500 font-medium">✓ Completado</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                                        <span>Presentación Innovatón</span>
+                                        <span class="text-blue-500 font-medium">● En Curso</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                        <span>Implementación Piloto</span>
+                                        <span class="text-gray-400">○ Planificado</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button onclick="openRAGDemo()" class="btn-cgr text-white font-semibold px-8 py-4 rounded-2xl text-center hover:shadow-2xl transition-all duration-300">
+                                <span class="flex items-center justify-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    </svg>
+                                    Probar Sistema RAG
+                                </span>
+                            </button>
+                            <button onclick="openZonaGamer()" class="glass-morphism border border-cgr-200 text-cgr-700 font-semibold px-8 py-4 rounded-2xl text-center hover:bg-cgr-50 transition-all duration-300">
+                                <span class="flex items-center justify-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.01M15 10h1.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    Zona Gamer
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-cgr-500 to-blue-500 rounded-2xl flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">E</span>
+                        </div>
+                        <span class="font-display font-bold text-2xl">EUREKA CGR</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed mb-6 max-w-md">
+                        Transformando la Contraloría General de la República a través de Inteligencia Artificial 
+                        y gamificación para una fiscalización más eficiente y prospectiva.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Proyecto</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#recursos" class="hover:text-white transition-colors">Entregables</a></li>
+                        <li><a href="#demos" class="hover:text-white transition-colors">Demos</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Documentación</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Metodología</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Innovatón</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">CGR 2025</a></li>
+                        <li><a href="#contacto" class="hover:text-white transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">© 2025 Proyecto EUREKA - Innovatón CGR. Contraloría General de la República de Costa Rica.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Demo functions - Replace with actual URLs
+        function openRAGDemo() {
+            window.open('https://innovaton-dj-401874010032.europe-west1.run.app/', '_blank');
+        }
+
+        function openZonaGamer() {
+            // Zona Gamer - Cadete de la Verificación
+            window.open('https://eurekacgr.github.io/cadete_cgr/', '_blank');
+        }
+
+        function openPodcast() {
+            // Podcast EUREKA - Abrir Google Drive directamente
+            window.open('https://drive.google.com/file/d/1jExNlfuQeg27L7rhSJZgvyB0M49jrQEo/view?usp=sharing', '_blank');
+        }
+
+        function openVideoExplicativo() {
+            // Video Explicativo EUREKA en inglés - YouTube
+            window.open('https://youtu.be/1DEC6ZLPCRI', '_blank');
+        }
+
+        function openVideoRAG() {
+            // Replace with actual RAG system demo video URL
+            window.open('https://youtu.be/eureka-rag-demo', '_blank');
+        }
+
+        function openMapaIdeas() {
+            // Replace with actual mind map URL
+            window.open('https://miro.com/eureka-mapa-ideas', '_blank');
+        }
+
+        function openDocumentacion() {
+            // This function is no longer used by the modified card but is kept for other potential uses.
+            window.open('https://docs.eureka-cgr.cr/', '_blank');
+        }
+
+        function openPresentacion() {
+            // Replace with actual presentation URL
+            window.open('presentacion.html', '_self');
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with animation classes
+        document.querySelectorAll('.animate-slide-up, .animate-fade-in, .animate-slide-down').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Add loading state
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+    </script>
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/08/20/14/20250820141704-EHOF5PZ6.js" defer></script>
 </body>
 </html>
