@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EUREKA - Transformación Digital de la CGR</title>
+    <script src="https://cdn.tailwindcss.com">    function openPresentacion(){
+        // Redirige a la página creada actual
+        window.location.href = window.location.origin + window.location.pathname;
+    }
+</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --bg:#0b1220;          /* fondo principal (oscuro, similar al sitio) */
+            --fg:#e2e8f0;          /* texto base */
+            --muted:#94a3b8;       /* texto secundario */
+            --card:#0f1b2d;        /* cards/glass base */
+            --card-border:rgba(148,163,184,0.15);
+            --accent:#22d3ee;      /* cyan similar al call-to-action del sitio */
+            --accent-2:#8b5cf6;    /* violeta */
+            --accent-3:#ec4899;    /* rosa */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
+        }
+        .glass-effect {
+            background: rgba(15, 27, 45, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+        }
+        .section-title {
+            font-weight: 900;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+        .card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2);
+        }
+        .tag {
+            background: #111827;
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid var(--card-border);
+        }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* Utilidades de color para alinear con el sitio */
+        .text-accent{ color: var(--accent); }
+        .btn-primary{
+            background-image: linear-gradient(90deg, var(--accent-2), var(--accent-3));
+            color: white; font-weight: 800;
+            padding: .75rem 2rem; border-radius: .75rem;
+            box-shadow: 0 10px 25px -10px rgba(139,92,246,.5);
+        }
+        .btn-primary:hover{ filter: brightness(1.05); }
+        .hero-gradient{
+            background-image: radial-gradient(1200px 600px at 50% 0%, rgba(139,92,246,.25), transparent 60%),
+                              radial-gradient(1200px 600px at 50% 100%, rgba(236,72,153,.15), transparent 60%),
+                              radial-gradient(circle, #0f172a 0%, #0b1220 100%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex items-center justify-center text-center hero-gradient">
+        <div class="z-10 p-4">
+            <h1 class="text-6xl md:text-8xl font-black text-white tracking-tighter mb-4 fade-in">EUREKA</h1>
+            <p class="text-xl md:text-2xl font-light text-gray-300 max-w-3xl mx-auto fade-in" style="transition-delay: 200ms;">
+                Una propuesta integral para la Transformación Digital de la Contraloría General de la República.
+            </p>
+            <div class="mt-8 fade-in" style="transition-delay: 400ms;">
+                 <a href="#about" class="btn-primary">Descubre Más</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16 md:py-24">
+
+        <!-- About Section -->
+        <section id="about" class="mb-24 fade-in">
+            <h2 class="section-title">¿Qué es EUREKA?</h2>
+            <div class="max-w-4xl mx-auto text-center text-lg leading-relaxed">
+                <p class="mb-4">
+                    EUREKA es una propuesta completa que combina investigación de vanguardia, desarrollo tecnológico y validación práctica. Nuestro objetivo es impulsar la transformación digital de la Contraloría General de la República (CGR).
+                </p>
+                <p class="font-bold text-accent">
+                    Nuestra meta es implementar un sistema de <span class="tag">Retrieval-Augmented Generation</span> para el procesamiento inteligente de procedimientos sancionatorios, utilizando un modelo de IA especializado y entrenado para esta tarea.
+                </p>
+            </div>
+        </section>
+
+        <!-- Components Section -->
+        <section id="components" class="mb-24 fade-in">
+            <h2 class="section-title">Componentes Principales</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card glass-effect rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-accent mb-2">Pitch Deck Estratégico</h3>
+                    <p>Visión estratégica, modelo de negocio, roadmap de implementación y análisis de impacto para la CGR.</p>
+                </div>
+                <div class="card glass-effect rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-accent mb-2">Sistema de Gamificación</h3>
+                    <p>Un juego espacial para validar datos extraídos por IA, representando la misión de verificación de la CGR de una forma lúdica.</p>
+                </div>
+                <div class="card glass-effect rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-accent mb-2">Presentación Audiovisual</h3>
+                    <p>Una presentación completa de la propuesta, su metodología y el impacto en la modernización de la CGR.</p>
+                </div>
+                <div class="card glass-effect rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-accent mb-2">Conversación Profunda</h3>
+                    <p>Análisis sobre IA y gamificación en la CGR, discutiendo la metodología, visión y el futuro de la fiscalización digital.</p>
+                </div>
+                <div class="card glass-effect rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-accent mb-2">Código Abierto</h3>
+                    <p>Acceso al GitHub del proyecto, tanto del juego como del extractor de datos, de forma abierta y documentada.</p>
+                </div>
+                <div class="card glass-effect rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-accent mb-2">Videos Demostrativos</h3>
+                    <p>Demostraciones de la IA en búsqueda inteligente de antecedentes y de la gamificación para la validación de datos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works Section -->
+        <section id="how-it-works" class="mb-24 fade-in">
+            <h2 class="section-title">Proceso de Trabajo</h2>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 text-center">
+                <div class="flex-1 p-6 glass-effect rounded-lg">
+                    <div class="text-5xl mb-4 text-accent">1</div>
+                    <h3 class="text-xl font-bold mb-2">Procesamiento Automático</h3>
+                    <p>Los documentos de la CGR son procesados automáticamente por un LLM para generar pares de pregunta-respuesta.</p>
+                </div>
+                <div class="text-2xl text-accent hidden md:block">→</div>
+                 <div class="text-2xl text-accent md:hidden">↓</div>
+                <div class="flex-1 p-6 glass-effect rounded-lg">
+                    <div class="text-5xl mb-4 text-accent">2</div>
+                    <h3 class="text-xl font-bold mb-2">Validación Gamificada</h3>
+                    <p>Los funcionarios validan los datos extraídos a través de mecánicas de juego colaborativas, ganando puntos y logros.</p>
+                </div>
+                 <div class="text-2xl text-accent hidden md:block">→</div>
+                 <div class="text-2xl text-accent md:hidden">↓</div>
+                <div class="flex-1 p-6 glass-effect rounded-lg">
+                    <div class="text-5xl mb-4 text-accent">3</div>
+                    <h3 class="text-xl font-bold mb-2">Base de Datos Institucional</h3>
+                    <p>Se construye una base de datos institucional robusta, confiable y accesible, mejorada continuamente.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section id="tech-stack" class="mb-24 fade-in">
+            <h2 class="section-title">Infraestructura Tecnológica</h2>
+            <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <h3 class="text-lg font-bold text-accent border-b-2 border-[color:var(--accent)] pb-2 mb-4">Inteligencia Artificial</h3>
+                    <ul class="space-y-2">
+                        <li>Gemini 1.5</li>
+                        <li>RAG</li>
+                        <li>Vector DB</li>
+                        <li>Fine-tuning</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-accent border-b-2 border-[color:var(--accent)] pb-2 mb-4">Gamificación</h3>
+                    <ul class="space-y-2">
+                        <li>Sistema de Puntos</li>
+                        <li>Logros</li>
+                        <li>Rankings</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-accent border-b-2 border-[color:var(--accent)] pb-2 mb-4">Backend</h3>
+                    <ul class="space-y-2">
+                        <li>Python</li>
+                        <li>FastAPI</li>
+                        <li>PostgreSQL</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-accent border-b-2 border-[color:var(--accent)] pb-2 mb-4">Infraestructura Cloud</h3>
+                    <ul class="space-y-2">
+                        <li>Google Cloud</li>
+                        <li>Kubernetes</li>
+                        <li>Docker</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Status & Contact Section -->
+        <section id="contact" class="fade-in">
+            <div class="glass-effect rounded-lg p-8 md:p-12 text-center max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-white mb-4">Estado Actual: Prototipo Funcional Completado</h2>
+                <p class="text-lg mb-6">
+                    Nuestro equipo está listo para implementar EUREKA y llevar a la Contraloría General de la República hacia el futuro digital.
+                </p>
+                <div class="flex justify-center items-center space-x-6">
+                    <a href="mailto:eureka.cgr.cr@gmail.com" class="text-accent hover:text-white transition-colors">eureka.cgr.cr@gmail.com</a>
+                    <a href="https://eurekacgr.github.io/eureka/" target="_blank" rel="noopener noreferrer" class="btn-primary text-slate-900 font-bold py-3 px-6 rounded-lg hover:bg-cyan-300 transition-colors">Visitar Sitio Web</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center py-8 border-t border-gray-800">
+        <p>&copy; 2024 EUREKA | Contraloría General de la República</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>
