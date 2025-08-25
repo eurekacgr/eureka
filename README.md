@@ -75,4 +75,4 @@ python -m http.server 8080
 
 Guarda y espera a que aparezca la URL pública del sitio.
 
-Cada vez que hagas push a main, GitHub Pages reconstruye el sitio automáticamente.
+> Cada vez que hagas push a main, GitHub Pages reconstruye el sitio automáticamente.
