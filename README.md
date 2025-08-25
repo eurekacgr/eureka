@@ -9,11 +9,6 @@
 - [📁 Estructura del repositorio](#-estructura-del-repositorio)
 - [🚀 Vista rápida (Quick Start)](#-vista-rápida-quick-start)
 - [🌐 Publicación con GitHub Pages](#-publicación-con-github-pages)
-- [🎨 Estilos & Paleta de colores CGR](#-estilos--paleta-de-colores-cgr)
-- [🖼️ Gestión de recursos (media/)](#️-gestión-de-recursos-media)
-- [🔗 Enlaces útiles](#-enlaces-útiles)
-- [🛠️ Desarrollo y buenas prácticas](#️-desarrollo-y-buenas-prácticas)
-- [🤝 Contribuir](#-contribuir)
 - [📄 Licencia](#-licencia)
 
 ---
@@ -76,3 +71,7 @@ python -m http.server 8080
 Guarda y espera a que aparezca la URL pública del sitio.
 
 > Cada vez que hagas push a main, GitHub Pages reconstruye el sitio automáticamente.
+
+## 📄 Licencia
+
+Uso interno como parte de la presentación de Innovatón
