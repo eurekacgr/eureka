@@ -2,8 +2,6 @@
 
 > Este es el sitio web del **Eureka Team** (CGR). Aquí se publican y organizan los materiales del proyecto: páginas informativas, presentaciones, imágenes y videos de demostración.
 
-![Banner del proyecto](media/banner_eureka.png "Coloca aquí un banner opcional (1920×480)")
-
 ---
 
 ## Tabla de contenido
